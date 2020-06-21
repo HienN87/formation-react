@@ -9,14 +9,28 @@ class JeuxTable extends Component {
   }
 
   render() {
+    const filterText = this.props.filterText;
+    const instockOnly = this.props.instockOnly;
+    let lastCategory;
     const rows = [];
+
     this.props.jeux.forEach(jeu => {
       console.log("jeu", jeu.name)
-      rows.push(<JeuRow key={jeu.name} jeu={jeu} />)
-    });
+      if (jeu.name.toLowerCase().toUpperCase().indexOf(filterText) === -1) {
+        return;
+      }
 
-    // rows.push(<JeuRow key="1" />);
-    // rows.push(<JeuRow key="2" />);
+      if (instockOnly && !jeu.stocked) {
+        return;
+      }
+
+      if (jeu.category !== lastCategory) {
+        rows.push(<JeuxCategory category={jeu.category} />)
+      }
+
+      rows.push(<JeuRow key={jeu.name} jeu={jeu} />);
+      lastCategory = jeu.category;
+    });
 
     return (
       <div>
@@ -28,7 +42,7 @@ class JeuxTable extends Component {
             </tr>
           </thead>
           <tbody>
-            <JeuxCategory category={"FPS"} />
+            <JeuxCategory />
             {rows}
           </tbody>
 

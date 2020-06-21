@@ -7,12 +7,14 @@ class SearchCompo extends Component {
     console.log("propos instockOnly ", this.props.instockOnly)
   }
 
-  handleFilterText = (e) => {
-    console.log(e.target.value);
+  handleFilterTextChange = (e) => {
+    //console.log(e.target.value);
+    this.props.handleFilterTextChange(e.target.value);
   }
 
   handleInStockChange = (e) => {
-    console.log(e.target.checked);
+    //console.log(e.target.checked);
+    this.props.handleInStockChange(e.target.checked);
   }
 
   render() {
@@ -21,7 +23,7 @@ class SearchCompo extends Component {
         <input type="text"
           placeholder="Search"
           text={this.props.filterText}
-          onChange={this.handleFilterText}
+          onChange={this.handleFilterTextChange}
         />
 
         <input type="checkbox"

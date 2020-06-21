@@ -12,12 +12,24 @@ class FilterableJeuxTable extends Component {
     }
   }
 
+  handleFilterTextChange = (e) => {
+    console.log("parent ", e);
+    this.setState({ filterText: e });
+  }
+
+  handleInStockChange = (e) => {
+    console.log("parent ", e);
+    this.setState({ instockOnly: e });
+  }
+
   render() {
     return (
       <div>
         <SearchCompo
           filterText={this.state.filterText}
           instockOnly={this.state.instockOnly}
+          handleFilterTextChange={this.handleFilterTextChange}
+          handleInStockChange={this.handleInStockChange}
         />
 
         <JeuxTable
